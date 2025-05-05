@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -12,12 +13,13 @@ const Login = () => {
         setShowPassword(!showpassword)
     };
 
+      const navigate = useNavigate();
 
     const Verify = (e) => {
     
         e.preventDefault();
         if (email && password && isChecked) {
-            setSuccess(true );
+            navigate("/homepage");
         } else {
             setError(true);
         }
@@ -29,7 +31,7 @@ const Login = () => {
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Login
         </h2>
-        <form  className="space-y-4">
+        <form onSubmit={Verify} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Email
@@ -75,9 +77,11 @@ const Login = () => {
             Forgot password?
           </a>{" "}
           |
+          <Link to="/signup">
           <a href="#" className="hover:underline ml-2">
             Create an account
           </a>
+          </Link>
         </div>
       </div>
     </div>
